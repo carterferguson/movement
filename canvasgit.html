@@ -15,18 +15,27 @@
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
             colorRect(playerXpos,playerYpos,playersize,playersize,'red'); // player
             
+       
+            
+            playermove();
         }//end main
        
         
         //player vars
         const playersize =20;
-        var playersXspeed= 5;
+        var playerXspeed= 5;
         var playerYspeed=5;
         var playerXpos=0;
         var playerYpos=0;
         //end vars
         
-        
+        function playermove(){
+            playerXpos += playerXspeed;// x move
+            playerYpos += playerYspeed;//Y move
+            
+            
+
+        }
         
          function colorRect(x,y,w,h,c){
             canvasContext.fillStyle = c;
