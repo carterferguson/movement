@@ -13,14 +13,26 @@
         
         function mainloop() {
             colorRect(0,0,canvas.width,canvas.height,'black'); // bg
-            colorRect(0,0,20,20,'red'); // player
+            colorRect(playerXpos,playerYpos,playersize,playersize,'red'); // player
             
-        }
+        }//end main
+       
+        
+        //player vars
+        const playersize =20;
+        var playersXspeed= 5;
+        var playerYspeed=5;
+        var playerXpos=0;
+        var playerYpos=0;
+        //end vars
+        
+        
         
          function colorRect(x,y,w,h,c){
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x,y,w,h);
         }
+        //end func
     
     </script>
 </body>
