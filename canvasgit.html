@@ -1,6 +1,7 @@
 <!doctype html>
+
 <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
     <script>
         var canvas, canvasContext;
 
@@ -9,39 +10,137 @@
             canvasContext = canvas.getContext('2d');
 
             setInterval(mainloop, 1000 / 50);
+            document.addEventListener('keydown', keypressed);
+            document.addEventListener('keyup', keyreleased);
         }
-        
+
         function mainloop() {
-            colorRect(0,0,canvas.width,canvas.height,'black'); // bg
-            colorRect(playerXpos,playerYpos,playersize,playersize,'red'); // player
-            
-       
+            colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
+            colorRect(playerXpos, playerYpos, playersize, playersize, 'red'); // player
             
             playermove();
-        }//end main
-       
-        
+            setup();
+        } //end main
+
+
         //player vars
-        const playersize =20;
-        var playerXspeed= 5;
-        var playerYspeed=5;
-        var playerXpos=0;
-        var playerYpos=0;
-        //end vars
+        const playersize = 20;
+        var playerXspeed = 20;
+        var playerYspeed = 20;
+        var playerXpos = 0;
+        var playerYpos = 0;
+        //end
+
+        //KEY 
+        var leftkeypressed = false;
+        var rightkeypressed = false;
+        var upkeypressed = false;
+        var downkeypressed = false;
+
+        const LEFT_KEY = 37;
+        const UP_KEY = 38;
+        const RIGHT_KEY = 39;
+        const DOWN_KEY = 40;
+        //END
         
-        function playermove(){
-            playerXpos += playerXspeed;// x move
-            playerYpos += playerYspeed;//Y move
-            
-            
+        //startup
+        var startpos = false;
+        
+       function setup(){
+           if (startpos = false){
+               startpos = true;
+               
+        }
+           if ( startpos = true){
+            playerXpos =  0.5*(canvas.width - playersize) ;
+            playerYpos = 0.5*(canvas.height - playersize) ;
+            startpos = false;
+           }
+           
+       }
+        
+        
+        
+        
+        
+        
+        function playermove() {
+            if (rightkeypressed) {
+                playerXpos += playerXspeed;
+            } // right move
+            if (leftkeypressed) {
+                playerXpos -= playerXspeed;
+            } // left move
+
+            if (upkeypressed) {
+                playerYpos -= playerYspeed;
+            } //up move
+            if (downkeypressed) {
+                playerYpos += playerYspeed;
+                //down move
+            }
+
+            if (playerXpos > canvas.width - playersize) {
+                playerXpos = 0;
+            } //right side to left tp
+            if (playerYpos > canvas.height - playersize) {
+                playerYpos = canvas.height - playersize;
+            } //topside border
+            if (playerYpos < 0 + playersize) {
+                playerYpos = 0;
+            }  //bottom border
+            if (playerXpos < 0 + playersize) {
+                playerXpos = canvas.width - playersize;
+            } //left to right tp
 
         }
-        
-         function colorRect(x,y,w,h,c){
+
+        function colorRect(x, y, w, h, c) {
             canvasContext.fillStyle = c;
-            canvasContext.fillRect(x,y,w,h);
+            canvasContext.fillRect(x, y, w, h);
         }
         //end func
-    
+
+        function keypressed(evt) {
+            if (evt.keyCode == LEFT_KEY) { //left
+                leftkeypressed = true;
+
+            }
+            if (evt.keyCode == RIGHT_KEY) { //right
+                rightkeypressed = true;
+
+            }
+            if (evt.keyCode == UP_KEY) { //up
+                upkeypressed = true;
+
+            }
+            if (evt.keyCode == DOWN_KEY) { //down
+                downkeypressed = true;
+
+            }
+
+        } //end func
+
+
+
+        function keyreleased(evt) {
+            if (evt.keyCode == LEFT_KEY) { //left
+                leftkeypressed = false;
+            }
+            if (evt.keyCode == RIGHT_KEY) { //right
+                rightkeypressed = false;
+
+            }
+            if (evt.keyCode == UP_KEY) { //up
+                upkeypressed = false;
+
+            }
+            if (evt.keyCode == DOWN_KEY) { //down
+                downkeypressed = false;
+
+            }
+
+        } //end func
+
     </script>
 </body>
